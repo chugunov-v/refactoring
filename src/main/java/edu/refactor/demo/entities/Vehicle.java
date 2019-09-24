@@ -16,17 +16,23 @@ public class Vehicle implements Serializable {
     @GeneratedValue
     @Column
     private Long id;
+
     @Column
     private String title;
+
     @Column
-    public double price;
+    private double price;
+
     @Column
     private String status = OPEN.getId();
+
     @Column
     private String type;
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<VehicleRental> rentals = new ArrayList<>();
+
     @Column
     public String serialNumber;
 

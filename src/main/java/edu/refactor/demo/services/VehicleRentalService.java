@@ -2,16 +2,14 @@ package edu.refactor.demo.services;
 
 import edu.refactor.demo.entities.VehicleRental;
 
-import java.util.Optional;
-
 public interface VehicleRentalService {
-	Iterable<VehicleRental> findAll();
+    Iterable<VehicleRental> findAll();
 
-	VehicleRental createBy(Long vehicleId, Long customerId);
+    VehicleRental create(Long vehicleId, Long customerId);
 
-	VehicleRental expireActiveVehicleRental(Long rentalId);
+    VehicleRental markAsExpired(Long rentalId);
 
-	Optional<VehicleRental> findById(Long rentalId);
+    void complete(Long rentalId);
 
-	VehicleRental save(VehicleRental vehicleRental);
+    void activate(Long rentalId);
 }

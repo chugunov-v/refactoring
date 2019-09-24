@@ -26,7 +26,7 @@ public class VehicleRental implements Serializable {
     private Instant startRent;
 
     @Column(name = "end_rent")
-    public Instant endRent;
+    private Instant endRent;
 
     @Column
     public String status = CREATED.getId();
@@ -52,7 +52,7 @@ public class VehicleRental implements Serializable {
     }
 
     public Double getVehiclePrice() {
-        return vehicle == null ? null : vehicle.price;
+        return vehicle == null ? null : vehicle.getPrice();
     }
 
     public void setVehicle(Vehicle vehicle) {
