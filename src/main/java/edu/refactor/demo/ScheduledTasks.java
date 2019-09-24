@@ -1,5 +1,8 @@
 package edu.refactor.demo;
 
+import edu.refactor.demo.dao.VehicleRentalDAO;
+import edu.refactor.demo.entities.VehicleRental;
+import edu.refactor.demo.entities.constants.CustomerStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -21,13 +24,13 @@ public class ScheduledTasks {
         Iterable<VehicleRental> vrs = vehicleRentalDao.findAll();
         for (VehicleRental vr : vrs) {
             if (vr.status.equals("active")) {
-                Instant i = vr.startRent;
+                Instant i = vr.getStartRent();
                 long j = Duration.between(i, Instant.now()).getSeconds();
-                if ("default".equals(vr.customer.status)) {
+                if (CustomerStatus.DEFAULT == vr.customer.getStatus()) {
                     if (j > 86400) {
                         vr.status = ("expired");
                     }
-                } else if ("vip".equals(vr.customer.status)) {
+                } else if (CustomerStatus.VIP == vr.customer.getStatus()) {
                     if (j > 259200) {
                         vr.status = ("expired");
                     }
