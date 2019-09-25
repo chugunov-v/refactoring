@@ -1,7 +1,7 @@
 package edu.refactor.demo.rest;
 
 import edu.refactor.demo.entities.Vehicle;
-import edu.refactor.demo.entities.constants.VehicleStatus;
+import edu.refactor.demo.entities.enums.VehicleStatus;
 import edu.refactor.demo.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

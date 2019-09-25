@@ -1,7 +1,8 @@
 package edu.refactor.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import edu.refactor.demo.entities.constants.CustomerStatus;
+import com.fasterxml.jackson.annotation.JsonValue;
+import edu.refactor.demo.entities.enums.CustomerStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static edu.refactor.demo.entities.constants.CustomerStatus.ACTIVE;
-import static edu.refactor.demo.entities.constants.CustomerStatus.DELETE;
+import static edu.refactor.demo.entities.enums.CustomerStatus.ACTIVE;
+import static edu.refactor.demo.entities.enums.CustomerStatus.DELETE;
 import static java.time.Instant.now;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
@@ -74,7 +75,7 @@ public class Customer implements Serializable {
     }
 
     public CustomerStatus getStatus() {
-        return CustomerStatus.valueOf(status);
+        return CustomerStatus.fromId(status);
     }
 
     public void setStatus(CustomerStatus status) {

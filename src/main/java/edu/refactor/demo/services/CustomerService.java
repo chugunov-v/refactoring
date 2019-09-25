@@ -2,16 +2,19 @@ package edu.refactor.demo.services;
 
 import edu.refactor.demo.entities.BillingAccount;
 import edu.refactor.demo.entities.Customer;
-import edu.refactor.demo.entities.constants.CustomerStatus;
+import edu.refactor.demo.entities.enums.CustomerStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 public interface CustomerService {
-    void updateStatus(CustomerStatus status, String email, String login);
 
-    List<Customer> findAll();
+    void updateCustomerStatus(CustomerStatus status, String email, String login);
 
-    Customer create(String login, String email);
+    List<Customer> loadCustomerList();
+
+    Customer createNewCustomer(String login, String email);
 
     List<BillingAccount> getBillingAccounts(String login, String email);
 }

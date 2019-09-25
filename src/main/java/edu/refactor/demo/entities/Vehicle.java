@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.refactor.demo.entities.constants.VehicleStatus.OPEN;
+import static edu.refactor.demo.entities.enums.VehicleStatus.OPEN;
 
 @Entity
 public class Vehicle implements Serializable {

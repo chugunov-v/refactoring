@@ -1,7 +1,7 @@
 package edu.refactor.demo.services;
 
 import edu.refactor.demo.entities.Vehicle;
-import edu.refactor.demo.entities.constants.VehicleStatus;
+import edu.refactor.demo.entities.enums.VehicleStatus;
 
 public interface VehicleService {
     Iterable<Vehicle> findAll();

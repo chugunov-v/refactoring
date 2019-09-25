@@ -1,4 +1,4 @@
-package edu.refactor.demo.entities.constants;
+package edu.refactor.demo.entities.enums;
 
 import org.springframework.lang.Nullable;
 

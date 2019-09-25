@@ -1,12 +1,12 @@
 package edu.refactor.demo.entities;
 
-import edu.refactor.demo.entities.constants.VehicleRentalStatus;
+import edu.refactor.demo.entities.enums.VehicleRentalStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 
-import static edu.refactor.demo.entities.constants.VehicleRentalStatus.CREATED;
+import static edu.refactor.demo.entities.enums.VehicleRentalStatus.CREATED;
 
 @Entity
 @Table(name = "vehicle_rental")
