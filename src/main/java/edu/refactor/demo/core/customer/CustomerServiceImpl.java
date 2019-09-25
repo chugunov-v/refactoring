@@ -44,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer createNewCustomer(String login, String email) throws RuntimeException{
+    public Customer createNewCustomer(String login, String email) throws RuntimeException {
         boolean exists = customerDAO.existsByLoginAndEmail(login, email);
         if (exists) {
             throw new RuntimeException("Customer already exists");

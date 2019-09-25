@@ -15,17 +15,14 @@ import java.util.Optional;
  * Created: 25.09.2019
  */
 public class CustomerDAOImpl extends SimpleJpaRepository<Customer, Long> implements CustomerDAO {
-    private final EntityManager em;
 
     @Autowired
     public CustomerDAOImpl(EntityManager em) {
         super(Customer.class, em);
-        this.em = em;
     }
 
     @Override
     public List<Customer> loadNotDeletedCustomers() {
-
         return findAll((Specification<Customer>) (root, criteriaQuery, criteriaBuilder) ->
                 criteriaBuilder.notEqual(root.get("status"), CustomerStatus.DELETE.getId()));
     }

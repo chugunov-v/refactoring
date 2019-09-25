@@ -4,6 +4,8 @@ import org.springframework.lang.Nullable;
 
 public enum VehicleStatus {
 	OPEN("open"),
+	LOST("lost"),
+	DELETE("delete"),
 	RESERVED("reserved"),
 	RETURNED("returned"),
 	SERVICE("service"),

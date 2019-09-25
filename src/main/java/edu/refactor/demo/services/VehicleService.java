@@ -3,10 +3,12 @@ package edu.refactor.demo.services;
 import edu.refactor.demo.entities.Vehicle;
 import edu.refactor.demo.entities.enums.VehicleStatus;
 
+import java.util.Map;
+
 public interface VehicleService {
-    Iterable<Vehicle> findAll();
+    Iterable<Vehicle> loadVehicleList();
 
-    Vehicle create(String serialNumber, String title, String type, Double price);
+    Vehicle createVehicle(Map<String, String> vehicleMap);
 
-    boolean updateStatus(String serialNumber, VehicleStatus vehicleStatus);
+    boolean updateStatus(String serialNumber, String nextStatus);
 }

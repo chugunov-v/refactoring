@@ -13,17 +13,14 @@ import java.util.List;
  */
 public class BillingAccountDAOImpl extends SimpleJpaRepository<BillingAccount, Long> implements BillingAccountDAO {
 
-    private final EntityManager em;
-
     public BillingAccountDAOImpl(EntityManager em) {
         super(BillingAccount.class, em);
-        this.em = em;
     }
 
     @Override
     public List<BillingAccount> findBillingAccountsByLoginAndEmail(String login, String email) {
         return findAll((Specification<BillingAccount>) (root, criteriaQuery, criteriaBuilder) ->
                 criteriaBuilder.and(criteriaBuilder.equal(root.get("customer").get("login"), login),
-                criteriaBuilder.equal(root.get("customer").get("email"), email)));
+                        criteriaBuilder.equal(root.get("customer").get("email"), email)));
     }
 }
