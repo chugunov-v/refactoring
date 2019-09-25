@@ -1,5 +1,7 @@
 package edu.refactor.demo.entities;
 
+import edu.refactor.demo.entities.constants.VehicleRentalStatus;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -7,6 +9,7 @@ import java.time.Instant;
 import static edu.refactor.demo.entities.constants.VehicleRentalStatus.CREATED;
 
 @Entity
+@Table(name = "vehicle_rental")
 public class VehicleRental implements Serializable {
     public static final long serialVersionUID = 1L;
     @Id
@@ -89,5 +92,10 @@ public class VehicleRental implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void markAsExpired(Instant endRent) {
+        status = VehicleRentalStatus.EXPIRED.getId();
+        setEndRent(endRent);
     }
 }

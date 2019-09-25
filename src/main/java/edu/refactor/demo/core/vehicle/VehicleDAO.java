@@ -1,4 +1,4 @@
-package edu.refactor.demo.dao;
+package edu.refactor.demo.core.vehicle;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

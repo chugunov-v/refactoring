@@ -9,6 +9,8 @@ public interface VehicleRentalService {
 
     VehicleRental markAsExpired(Long rentalId);
 
+    void markAsExpiredIfNecessary();
+
     void complete(Long rentalId);
 
     void activate(Long rentalId);

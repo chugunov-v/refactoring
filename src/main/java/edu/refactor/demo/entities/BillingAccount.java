@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.Instant;
 
 @Entity
+@Table(name = "billing_account")
 public class BillingAccount implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

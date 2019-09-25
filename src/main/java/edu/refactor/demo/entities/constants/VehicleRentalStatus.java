@@ -3,8 +3,8 @@ package edu.refactor.demo.entities.constants;
 import org.springframework.lang.Nullable;
 
 public enum VehicleRentalStatus {
-	CREATED("created");
-
+	CREATED("created"),
+	EXPIRED("expired");
 
 	private String id;
 
