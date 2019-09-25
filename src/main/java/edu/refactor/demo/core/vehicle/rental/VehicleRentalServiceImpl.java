@@ -1,8 +1,10 @@
 package edu.refactor.demo.core.vehicle.rental;
 
+import edu.refactor.demo.entities.Customer;
+import edu.refactor.demo.entities.Vehicle;
+import edu.refactor.demo.entities.VehicleRental;
 import edu.refactor.demo.core.customer.CustomerDAO;
 import edu.refactor.demo.core.vehicle.VehicleDAO;
-import edu.refactor.demo.entities.VehicleRental;
 import edu.refactor.demo.services.VehicleRentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,9 +34,13 @@ public class VehicleRentalServiceImpl implements VehicleRentalService {
         return vehicleDAO.findById(vehicleId)
             .map(vehicle -> customerDAO
                 .findById(customerId)
-                .map(customer -> VehicleRental.create(customer, vehicle))
+                .map(customer -> create(vehicle, customer))
                 .orElse(null))
             .orElse(null);
+    }
+
+    private VehicleRental create(Vehicle vehicle, Customer customer) {
+        return vehicleRentalDAO.save(VehicleRental.create(customer, vehicle));
     }
 
     @Override

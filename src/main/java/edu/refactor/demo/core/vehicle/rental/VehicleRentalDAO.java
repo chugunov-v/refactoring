@@ -1,17 +1,30 @@
 package edu.refactor.demo.core.vehicle.rental;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-
 import edu.refactor.demo.entities.VehicleRental;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
 public interface VehicleRentalDAO extends CrudRepository<VehicleRental, Long> {
-    Optional<VehicleRental> findActiveById(Long id);
 
+    String UPDATE_CUSTOMER_STATUS = "update customer c set c.status = 'expired' where c.id=(select cust.id from vehicle_rental r join customer cust on cust.id=r.customer_id " +
+        "where r.status='active' and ((datediff(msc, now(), r.start_rent) > 86400 and c.status='default') or (datediff(msc, now(), r.start_rent) > 259200 and c.status='vip'))";
+    String FIND_ACTIVE_BY_ID = "select r from vehicleRental r where id=:id and status='active'";
+    String UPDATE_STATUS = "UPDATE vehicleRental r SET r.status = 'active', r.endRent=now() WHERE r.id=:id and (r.status='created' or r.status ='expired')";
+
+    @Query(FIND_ACTIVE_BY_ID)
+    Optional<VehicleRental> findActiveById(@Param("id") Long id);
+
+    @Query(UPDATE_CUSTOMER_STATUS)
+    @Modifying(clearAutomatically = true)
     void updateCustomerStatus();
 
-    void activate(Long id);
+    @Query(value = UPDATE_STATUS, nativeQuery = true)
+    @Modifying(clearAutomatically = true)
+    void activate(@Param("id") Long id);
 }
