@@ -22,7 +22,7 @@ public class VehicleRentalController {
     }
 
     @RequestMapping(value = "/complete", method = RequestMethod.GET)
-    public ResponseWrapper<Boolean> completeVehicle(@RequestParam(name = "rental") Long rentalId) {
+    public ResponseWrapper<Boolean> completeVehicleRental(@RequestParam(name = "rental") Long rentalId) {
         try {
             vehicleRentalService.complete(rentalId);
         } catch (RuntimeException e) {
@@ -32,18 +32,18 @@ public class VehicleRentalController {
     }
 
     @RequestMapping(value = "/active", method = RequestMethod.GET)
-    public ResponseWrapper<Boolean> activeVehicle(@RequestParam(name = "rental") Long rentalId) {
+    public ResponseWrapper<Boolean> activeVehicleRental(@RequestParam(name = "rental") Long rentalId) {
         vehicleRentalService.activate(rentalId);
         return new ResponseWrapper<>(true);
     }
 
     @RequestMapping(value = "/expired", method = RequestMethod.GET)
-    public ResponseWrapper<VehicleRental> expiredVehicle(@RequestParam(name = "rental") Long rentalId) {
+    public ResponseWrapper<VehicleRental> expiredVehicleRental(@RequestParam(name = "rental") Long rentalId) {
         return new ResponseWrapper<>(vehicleRentalService.markAsExpired(rentalId));
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ResponseWrapper<VehicleRental> createVehicle(@RequestParam(name = "vehicle") Long vehicleId, @RequestParam(name = "customer") Long customerId) {
+    public ResponseWrapper<VehicleRental> createVehicleRental(@RequestParam(name = "vehicle") Long vehicleId, @RequestParam(name = "customer") Long customerId) {
         return new ResponseWrapper<>(vehicleRentalService.create(vehicleId, customerId));
     }
 }

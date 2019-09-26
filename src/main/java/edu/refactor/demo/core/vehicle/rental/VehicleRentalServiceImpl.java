@@ -10,12 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.logging.Logger;
 
 @Service
 public class VehicleRentalServiceImpl implements VehicleRentalService {
     private final VehicleRentalDAO vehicleRentalDAO;
     private final CustomerDAO customerDAO;
     private final VehicleDAO vehicleDAO;
+
+    private static final Logger LOGGER = Logger.getLogger(VehicleRentalServiceImpl.class.getName());
 
     @Autowired
     public VehicleRentalServiceImpl(VehicleRentalDAO vehicleRentalDAO, CustomerDAO customerDAO, VehicleDAO vehicleDAO) {
@@ -26,17 +29,24 @@ public class VehicleRentalServiceImpl implements VehicleRentalService {
 
     @Override
     public Iterable<VehicleRental> findAll() {
-        return vehicleRentalDAO.findAll();
+        LOGGER.info("Loading vehicle rental list");
+        Iterable<VehicleRental> vehicleRentals = vehicleRentalDAO.findAll();
+        LOGGER.info("Vehicle rental list was loaded");
+        return vehicleRentals;
     }
 
     @Override
     public VehicleRental create(Long vehicleId, Long customerId) {
-        return vehicleDAO.findById(vehicleId)
-            .map(vehicle -> customerDAO
-                .findById(customerId)
-                .map(customer -> create(vehicle, customer))
-                .orElse(null))
-            .orElse(null);
+        LOGGER.info("Creating vehicle rental");
+        VehicleRental vehicleRental = vehicleDAO.findById(vehicleId)
+                .map(vehicle -> customerDAO
+                        .findById(customerId)
+                        .map(customer -> create(vehicle, customer))
+                        .orElse(null))
+                .orElse(null);
+
+        LOGGER.info("Vehicle rental was created");
+        return vehicleRental;
     }
 
     private VehicleRental create(Vehicle vehicle, Customer customer) {
@@ -45,10 +55,14 @@ public class VehicleRentalServiceImpl implements VehicleRentalService {
 
     @Override
     public VehicleRental markAsExpired(Long rentalId) {
-        return vehicleRentalDAO
-            .findActiveById(rentalId)
-            .map(this::saveExpired)
-            .orElse(null);
+        LOGGER.info("Marking vehicle rental as expired");
+        VehicleRental vehicleRental = vehicleRentalDAO
+                .findActiveById(rentalId)
+                .map(this::saveExpired)
+                .orElse(null);
+
+        LOGGER.info("Vehicle rental was marked as expired");
+        return vehicleRental;
     }
 
     private VehicleRental saveExpired(VehicleRental vehicleRental) {
@@ -58,6 +72,7 @@ public class VehicleRentalServiceImpl implements VehicleRentalService {
 
     @Override
     public void markAsExpiredIfNecessary() {
+        LOGGER.info("Scheduled task was started");
         vehicleRentalDAO.updateCustomerStatus();
     }
 
@@ -94,6 +109,8 @@ public class VehicleRentalServiceImpl implements VehicleRentalService {
 
     @Override
     public void activate(Long rentalId) {
+        LOGGER.info("Activating vehicle rental");
         vehicleRentalDAO.activate(rentalId);
+        LOGGER.info("Vehicle rental was activated");
     }
 }
