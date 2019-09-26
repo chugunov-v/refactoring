@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 
+import static edu.refactor.demo.entities.enums.VehicleRentalStatus.COMPLETED;
 import static edu.refactor.demo.entities.enums.VehicleRentalStatus.CREATED;
 
 @Entity
@@ -96,6 +97,11 @@ public class VehicleRental implements Serializable {
 
     public void markAsExpired(Instant endRent) {
         status = VehicleRentalStatus.EXPIRED.getId();
+        setEndRent(endRent);
+    }
+
+    public void markAsCompleted(Instant endRent) {
+        status = COMPLETED.getId();
         setEndRent(endRent);
     }
 }

@@ -23,4 +23,9 @@ public class BillingAccountDAOImpl extends SimpleJpaRepository<BillingAccount, L
                 criteriaBuilder.and(criteriaBuilder.equal(root.get("customer").get("login"), login),
                         criteriaBuilder.equal(root.get("customer").get("email"), email)));
     }
+
+    @Override
+    public List<BillingAccount> findBy(Long vehicleRentalId) {
+       return null;
+    }
 }

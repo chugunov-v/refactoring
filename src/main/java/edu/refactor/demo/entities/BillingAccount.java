@@ -3,6 +3,7 @@ package edu.refactor.demo.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Optional;
 
 @Entity
 @Table(name = "billing_account")
@@ -71,5 +72,22 @@ public class BillingAccount implements Serializable {
         billingAccount.setCustomer(customer);
         billingAccount.setCreatedDate(Instant.now());
         return billingAccount;
+    }
+
+    public static Optional<BillingAccount> withdrawMoney(BillingAccount billingAccount, double vehiclePrice) {
+//        double v = billingAccount.money - vehiclePrice;
+//        if (v >= 0) {
+//            vehiclePrice -= v;
+//            billingAccount.money = v;
+//        } else {
+//            vehiclePrice -= billingAccount.money;
+//            billingAccount.money = 0;
+//        }
+////
+//        if (vehiclePrice < 0) {
+//            throw ExceptionUtils.NOT_FOUND_MONEY_EXCEPTION;
+//        }
+
+        return Optional.of(billingAccount);
     }
 }

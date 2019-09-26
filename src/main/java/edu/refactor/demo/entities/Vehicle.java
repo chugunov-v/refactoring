@@ -1,6 +1,7 @@
 package edu.refactor.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import edu.refactor.demo.entities.enums.VehicleStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -62,6 +63,10 @@ public class Vehicle implements Serializable {
 
     public String getStatus() {
         return status;
+    }
+
+    public VehicleStatus getVehicleStatus() {
+        return VehicleStatus.fromId(status);
     }
 
     public void setStatus(String status) {

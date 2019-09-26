@@ -4,7 +4,8 @@ import org.springframework.lang.Nullable;
 
 public enum VehicleRentalStatus {
 	CREATED("created"),
-	EXPIRED("expired");
+	EXPIRED("expired"),
+	COMPLETED("completed");
 
 	private String id;
 

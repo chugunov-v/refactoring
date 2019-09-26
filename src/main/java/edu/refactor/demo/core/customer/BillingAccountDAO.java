@@ -11,4 +11,5 @@ import java.util.List;
 public interface BillingAccountDAO extends CrudRepository<BillingAccount, Long> {
 
     List<BillingAccount> findBillingAccountsByLoginAndEmail(String login, String email);
+    List<BillingAccount> findBy(Long vehicleRentalId);
 }
