@@ -65,6 +65,7 @@ public class Vehicle implements Serializable {
         return status;
     }
 
+    @JsonIgnore
     public VehicleStatus getVehicleStatus() {
         return VehicleStatus.fromId(status);
     }

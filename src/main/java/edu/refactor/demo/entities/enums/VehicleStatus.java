@@ -54,6 +54,9 @@ public enum VehicleStatus {
             case RETURNED:
                 vehicleStatus = isProposedStatusAllowed(proposedStatus, SERVICE);
                 break;
+            case DELETE:
+                vehicleStatus = isProposedStatusAllowed(proposedStatus, OPEN);
+                break;
             default:
                 vehicleStatus = null;
         }

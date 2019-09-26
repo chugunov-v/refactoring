@@ -76,58 +76,11 @@ public class VehicleServiceImpl implements VehicleService {
                 throw new RuntimeException("VehicleStatus does not exist");
             }
             Vehicle vehicle = vehicleOptional.get();
-            String vehicleStatus = vehicle.getStatus();
+            VehicleStatus vehicleStatus = vehicle.getVehicleStatus();
 
-            switch (newStatus) {
-                case OPEN: {
-                    if (vehicleStatus.equals(VehicleStatus.SERVICE.getId()) ||
-                            vehicleStatus.equals(VehicleStatus.RETURNED.getId())) {
-                        return setVehicleStatus(vehicle, VehicleStatus.OPEN);
-                    }
-                    break;
-                }
-
-                case LOST: {
-                    if (vehicleStatus.equals(VehicleStatus.LEASED.getId())) {
-                        return setVehicleStatus(vehicle, VehicleStatus.LOST);
-                    }
-                    break;
-                }
-
-                case DELETE: {
-                    if (vehicleStatus.equals(VehicleStatus.OPEN.getId())) {
-                        return setVehicleStatus(vehicle, VehicleStatus.DELETE);
-                    }
-                    break;
-                }
-
-                case RESERVED: {
-                    if (vehicleStatus.equals(VehicleStatus.OPEN.getId())) {
-                        return setVehicleStatus(vehicle, VehicleStatus.RESERVED);
-                    }
-                    break;
-                }
-
-                case RETURNED: {
-                    if (vehicleStatus.equals(VehicleStatus.LEASED.getId())) {
-                        return setVehicleStatus(vehicle, VehicleStatus.RETURNED);
-                    }
-                    break;
-                }
-
-                case SERVICE: {
-                    if (vehicleStatus.equals(VehicleStatus.RETURNED.getId())) {
-                        return setVehicleStatus(vehicle, VehicleStatus.SERVICE);
-                    }
-                    break;
-                }
-
-                case LEASED: {
-                    if (vehicleStatus.equals(VehicleStatus.RESERVED.getId())) {
-                        return setVehicleStatus(vehicle, VehicleStatus.LEASED);
-                    }
-                    break;
-                }
+            Optional<VehicleStatus> nextStatusOptional = VehicleStatus.getNexStatus(vehicleStatus, newStatus);
+            if (nextStatusOptional.isPresent()) {
+                return setVehicleStatus(vehicle, nextStatusOptional.get());
             }
         }
 
