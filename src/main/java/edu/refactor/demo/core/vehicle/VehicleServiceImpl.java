@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -40,7 +41,7 @@ public class VehicleServiceImpl implements VehicleService {
         LOGGER.info("Creating vehicle");
 
         String title = vehicleMap.get("title");
-        Double price = Double.valueOf(vehicleMap.get("price"));
+        BigDecimal price = new BigDecimal(vehicleMap.get("price"));
         String type = vehicleMap.get("type");
         String serialNumber = vehicleMap.get("serialNumber");
 
@@ -56,7 +57,7 @@ public class VehicleServiceImpl implements VehicleService {
         return newVehicle;
     }
 
-    private boolean isEmpty(String title, Double price, String type, String serialNumber) {
+    private boolean isEmpty(String title, BigDecimal price, String type, String serialNumber) {
         return StringUtils.isEmpty(title) || price == null || StringUtils.isEmpty(type) || StringUtils.isEmpty(serialNumber);
     }
 

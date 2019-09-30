@@ -5,6 +5,7 @@ import edu.refactor.demo.entities.enums.VehicleStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class Vehicle implements Serializable {
     private String title;
 
     @Column
-    private double price;
+    private BigDecimal price;
 
     @Column
     private String status = OPEN.getId();
@@ -53,11 +54,11 @@ public class Vehicle implements Serializable {
         this.title = title;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -98,7 +99,7 @@ public class Vehicle implements Serializable {
         this.serialNumber = serialNumber;
     }
 
-    public static Vehicle create(double price, String title, String type, String serialNumber) {
+    public static Vehicle create(BigDecimal price, String title, String type, String serialNumber) {
         Vehicle vehicle = new Vehicle();
         vehicle.setPrice(price);
         vehicle.setTitle(title);

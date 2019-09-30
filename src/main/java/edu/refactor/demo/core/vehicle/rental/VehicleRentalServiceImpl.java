@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -114,7 +115,7 @@ public class VehicleRentalServiceImpl implements VehicleRentalService {
 
     private void withdrawMoneyFromBillingAccount(VehicleRental vehicleRental) {
         LOGGER.info("Trying to withdraw money from billing account");
-        Double vehiclePrice = vehicleRental.getVehiclePrice();
+        BigDecimal vehiclePrice = vehicleRental.getVehiclePrice();
         billingAccountDAO.findBy(vehicleRental.getId())
             .stream()
             .map(account -> withdrawMoney(account, vehiclePrice))

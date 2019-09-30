@@ -4,6 +4,7 @@ import edu.refactor.demo.entities.enums.VehicleRentalStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.Instant;
 
 import static edu.refactor.demo.entities.enums.VehicleRentalStatus.COMPLETED;
@@ -55,7 +56,7 @@ public class VehicleRental implements Serializable {
         return vehicle;
     }
 
-    public Double getVehiclePrice() {
+    public BigDecimal getVehiclePrice() {
         return vehicle == null ? null : vehicle.getPrice();
     }
 
