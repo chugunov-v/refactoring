@@ -92,7 +92,7 @@ public class BillingAccount implements Serializable {
      */
     public void checkBalanceAndPay(Currency currency, BigDecimal value){
         if(check(currency, value))
-            pay( Currency.DOLLARS, value);
+            pay( currency, value);
         else
             throw ExceptionUtils.NOT_FOUND_MONEY_EXCEPTION;
     }
