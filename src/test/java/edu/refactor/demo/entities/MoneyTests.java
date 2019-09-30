@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+
 public class MoneyTests {
 
     Money money(Currency c, BigDecimal v){
@@ -39,7 +42,7 @@ public class MoneyTests {
                 assertEquals(y.getValue(), BigDecimal.ZERO);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testMoreThanCanAfford() {
         BillingAccount b = new BillingAccount();
         List<Money> bills = new ArrayList<>();
@@ -48,7 +51,7 @@ public class MoneyTests {
         bills.add(money(Currency.EUROS, new BigDecimal(300)));
         b.setMoney(bills);
 
-        b.checkBalanceAndPay(Currency.EUROS, new BigDecimal(1000));
+        assertFalse(b.checkBalanceAndPay(Currency.EUROS, new BigDecimal(1000)));
     }
 
 

@@ -1,7 +1,8 @@
-package edu.refactor.demo.core.vehicle;
+package edu.refactor.demo.services.impl;
 
 import edu.refactor.demo.entities.Vehicle;
 import edu.refactor.demo.entities.enums.VehicleStatus;
+import edu.refactor.demo.core.vehicle.VehicleDAO;
 import edu.refactor.demo.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -6,6 +6,10 @@ import edu.refactor.demo.services.VehicleRentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+import static org.springframework.util.CollectionUtils.isEmpty;
+
 @RestController
 @RequestMapping(value = "/rental")
 public class VehicleRentalController {
@@ -19,7 +23,11 @@ public class VehicleRentalController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseWrapper<Iterable<VehicleRental>> loadVehicleRentalList() {
         try {
-            return new ResponseWrapper<>(vehicleRentalService.findAll());
+            List<VehicleRental> vehicleRentals = vehicleRentalService.findAll();
+            if(isEmpty(vehicleRentals)){
+                return new ResponseWrapper<>("Not found vehicle rental");
+            }
+            return new ResponseWrapper<>(vehicleRentals);
         } catch (RuntimeException e) {
             return new ResponseWrapper<>(e.getMessage());
         }
