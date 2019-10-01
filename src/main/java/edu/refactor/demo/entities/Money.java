@@ -8,12 +8,20 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "money")
 public class Money implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue
     @Column
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private BillingAccount id;
+    private Long id;
+
+
+
+    @ManyToOne()
+    @JoinColumn(name="billingAccountFK")
+    private BillingAccount billingAccount;
 
     @Column
     private Currency currency;
@@ -21,12 +29,12 @@ public class Money implements Serializable {
     @Column
     private BigDecimal value;
 
-    public BillingAccount getId() {
-        return id;
+    public BillingAccount getBillingAccount() {
+        return billingAccount;
     }
 
-    public void setId(BillingAccount id) {
-        this.id = id;
+    public void setBillingAccount(BillingAccount billingAccount) {
+        this.billingAccount = billingAccount;
     }
 
     public Currency getCurrency() {

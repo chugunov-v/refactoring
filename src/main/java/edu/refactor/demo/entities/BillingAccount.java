@@ -18,12 +18,16 @@ public class BillingAccount implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
-    @Column
+    @Column(name="id")
     private Long id;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<VehicleRental> rentals = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany
+    @JoinTable(name="money", joinColumns={ @JoinColumn(name="billingAccountFK", referencedColumnName="id") })
     private List<Money> money;
 
     @Column(name = "is_primary")
