@@ -1,4 +1,4 @@
-package edu.refactor.demo.core.vehicle.rental;
+package edu.refactor.demo.core.vehicle;
 
 import edu.refactor.demo.entities.VehicleRental;
 import org.springframework.data.jpa.repository.Modifying;
@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -30,4 +31,7 @@ public interface VehicleRentalDAO extends CrudRepository<VehicleRental, Long> {
     @Query(value = UPDATE_STATUS)
     @Modifying(clearAutomatically = true)
     void activate(@Param(ID) Long id);
+
+    @Override
+    List<VehicleRental> findAll();
 }

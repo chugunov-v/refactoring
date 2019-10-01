@@ -2,8 +2,10 @@ package edu.refactor.demo.services;
 
 import edu.refactor.demo.entities.VehicleRental;
 
+import java.util.List;
+
 public interface VehicleRentalService {
-    Iterable<VehicleRental> findAll();
+    List<VehicleRental> findAll();
 
     VehicleRental create(Long vehicleId, Long customerId);
 

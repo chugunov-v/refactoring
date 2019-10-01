@@ -2,7 +2,6 @@ package edu.refactor.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.refactor.demo.entities.enums.Currency;
-import edu.refactor.demo.exceptions.ExceptionUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,7 +9,6 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Entity
 @Table(name = "billing_account")
@@ -94,11 +92,12 @@ public class BillingAccount implements Serializable {
      * @param  value of payment
      * @return True if payment is possible
      */
-    public void checkBalanceAndPay(Currency currency, BigDecimal value){
-        if(check(currency, value))
-            pay( currency, value);
-        else
-            throw ExceptionUtils.NOT_FOUND_MONEY_EXCEPTION;
+    public boolean checkBalanceAndPay(Currency currency, BigDecimal value) {
+        if (check(currency, value)) {
+            pay(currency, value);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -159,8 +158,7 @@ public class BillingAccount implements Serializable {
         }
     }
 
-    public static Optional<BillingAccount> withdrawMoney(BillingAccount billingAccount, BigDecimal vehiclePrice) {
-        billingAccount.checkBalanceAndPay( Currency.DOLLARS, vehiclePrice );
-        return Optional.of(billingAccount);
+    public static boolean withdrawMoney(BillingAccount billingAccount, BigDecimal vehiclePrice) {
+        return billingAccount.checkBalanceAndPay( Currency.DOLLARS, vehiclePrice );
     }
 }
